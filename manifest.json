@@ -7,5 +7,7 @@
 		"default_title": "FollowUp on the current URL",
 		"default_popup": "popup.html"
 	},
-	"permissions": []
+	"permissions": [
+		"tabs"
+	]
 }

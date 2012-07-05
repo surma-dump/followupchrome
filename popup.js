@@ -1,6 +1,15 @@
 (function() {
-	var months = ["jan", "feb", "mar", "apr", "may", "jun",
-		"jul", "aug", "sep", "oct", "nov", "dec"];
+	var months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun',
+		'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+
+	// Error handling
+	var error = document.getElementById('errorarea');
+	var showError = function(msg) {
+		error.innerText = msg;
+		setTimeout(function() {
+			error.innerText = '';
+		}, 4000);
+	}
 	// Select lists
 	var getSelectedValue = function(elem) {
 		return elem.options[elem.selectedIndex].value;
@@ -30,7 +39,7 @@
 			return [now.getDate(), now.getMonth(), now.getHours(), now.getMinutes()];
 		}
 	}
-	var presetarea = document.getElementById('presets');
+	var presetarea = document.getElementById('presetarea');
 	var setSelections = function(arr) {
 		day.selectedIndex = arr[0];
 		month.selectedIndex = arr[1];
@@ -49,10 +58,22 @@
 	// Send button
 	var send = document.getElementById('send');
 	send.addEventListener('click', function() {
-		chrome.tabs.create({
-			"url": "mailto:"+getSelectedValue(month)+getSelectedValue(day)+"@followupthen.com",
-			"active": true
-
+		chrome.tabs.query({
+			"active": true,
+			"currentWindow": true
+		}, function(tab) {
+			if(tab == undefined || tab == null || tab.length == 0) {
+				showError('Could not get active tab');
+				return;
+			}
+			tab = tab[0];
+			var timestamp = getSelectedValue(hour)+getSelectedValue(minute)+
+				getSelectedValue(month)+getSelectedValue(day);
+			var subject = tab.title+' ('+tab.url+')';
+			chrome.tabs.create({
+				'url': 'mailto:'+timestamp+'@followupthen.com?subject='+subject;
+				'active': true
+			});
 		});
-	})
+	});
 })()
