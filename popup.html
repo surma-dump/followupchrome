@@ -1,8 +1,10 @@
+<!doctype html>
 <head>
 	<style>
-		body {
+		* {
 			font-family: sans-serif;
-			font-size: 6pt;
+			font-size: 8pt;
+			box-sizing: border-box;
 		}
 		tr {
 			margin: 5px 0;
@@ -16,49 +18,34 @@
 		td {
 			padding: 3px;
 		}
-		div#errors {
+		div#errorarea {
 			color: red;
+		}
+		button, input {
+			width: 100%;
 		}
 	</style>
 </head>
 <body>
-	<div id="presetarea">
 	</div>
 	<table>
 		<tr>
 			<td>
-				Day
-			</td>
-			<td>
-				<select id="day">
-				</select>
-			</td>
-			<td>
-				Month
-			</td>
-			<td>
-				<select id="month">
-				</select>
+				<table id="presetarea">
+				</table>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				Hour
+				<input type="text" id="addy" value="1minute" />
 			</td>
+		</tr>
+		<tr>
 			<td>
-				<select id="hour">
-				</select>
-			</td>
-			<td>
-				Minute
-			</td>
-			<td>
-				<select id="minute">
-				</select>
+				<button id="send">Send</button>
 			</td>
 		</tr>
 	</table>
-	<button id="send">Send</button>
 	<div id="errorarea">
 	</div>
 	<script src="popup.js"></script>

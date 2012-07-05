@@ -1,7 +1,4 @@
 (function() {
-	var months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun',
-		'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
-
 	// Error handling
 	var error = document.getElementById('errorarea');
 	var showError = function(msg) {
@@ -10,49 +7,51 @@
 			error.innerText = '';
 		}, 4000);
 	}
-	// Select lists
-	var getSelectedValue = function(elem) {
-		return elem.options[elem.selectedIndex].value;
-	}
-	var generateOptions = function(elem, from, to, mapping) {
-		for(var i = from; i <= to; i++) {
-			if(mapping == null || mapping == undefined) {
-				elem.options[i] = new Option(''+i, i);
-			} else {
-				elem.options[i] = new Option(mapping[i], mapping[i]);
-			}
-		}
-	}
-	var day = document.getElementById('day');
-	generateOptions(day, 1, 31);
-	var month = document.getElementById('month');
-	generateOptions(month, 0, 11, months);
-	var hour = document.getElementById('hour');
-	generateOptions(hour, 0, 23);
-	var minute = document.getElementById('minute');
-	generateOptions(minute, 0, 59);
 
 	// Presets
+	var addy = document.getElementById('addy');
 	var presets = {
-		'+5 min': function() {
-			var now = new Date(Date.now()+5*60*1000);
-			return [now.getDate(), now.getMonth(), now.getHours(), now.getMinutes()];
+		'Now': '1minute',
+		'+1 Hour': '1hour',
+		'Tomorrow': 'tomorrow',
+		'Weekdays': {
+			'Monday': 'monday',
+			'Tuesday': 'tuesday',
+			'Wednesday': 'wednesday',
+			'Thursday': 'thursday',
+			'Friday': 'friday',
+			'Saturday': 'saturday',
+			'Sunday': 'sunday'
 		}
 	}
 	var presetarea = document.getElementById('presetarea');
-	var setSelections = function(arr) {
-		day.selectedIndex = arr[0];
-		month.selectedIndex = arr[1];
-		hour.selectedIndex = arr[2];
-		minute.selectedIndex = arr[3];
-	}
-	for(preset in presets) {
+	var generatePresetButton = function(name, action) {
+		if(typeof(action) == "string") {
+			action = function() {
+				return this;
+			}.bind(action);
+		}
 		var button = document.createElement('button');
-		button.textContent = preset;
-		presetarea.appendChild(button);
+		button.textContent = name;
 		button.addEventListener('click', function() {
-			setSelections(presets[preset]());
+			addy.value = action();
 		});
+		return button;
+	}
+	for(var preset in presets) {
+		var tr = document.createElement('tr');
+		var td = document.createElement('td')
+		var subpresets = presets[preset];
+		if (typeof(presets[preset]) == "string") {
+			subpresets = {};
+			subpresets[preset] = presets[preset];
+		}
+		for(var subpreset in subpresets) {
+			td.appendChild(generatePresetButton(subpreset, subpresets[subpreset]));
+			tr.appendChild(td);
+			td = document.createElement('td');
+		}
+		presetarea.appendChild(tr);
 	}
 
 	// Send button
@@ -67,11 +66,9 @@
 				return;
 			}
 			tab = tab[0];
-			var timestamp = getSelectedValue(hour)+getSelectedValue(minute)+
-				getSelectedValue(month)+getSelectedValue(day);
 			var subject = tab.title+' ('+tab.url+')';
 			chrome.tabs.create({
-				'url': 'mailto:'+timestamp+'@followupthen.com?subject='+subject;
+				'url': 'mailto:'+addy.value+'@followupthen.com?subject='+subject,
 				'active': true
 			});
 		});
