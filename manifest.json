@@ -1,0 +1,11 @@
+{
+	"name": "FollowUpChrome",
+	"version": "0.1",
+	"manifest_version": 2,
+	"description": "Sends the current URL to FollowUpThen",
+	"browser_action": {
+		"default_title": "FollowUp on the current URL",
+		"default_popup": "popup.html"
+	},
+	"permissions": []
+}

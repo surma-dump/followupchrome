@@ -1,0 +1,60 @@
+<head>
+	<style>
+		body {
+			font-family: sans-serif;
+			font-size: 6pt;
+		}
+		tr {
+			margin: 5px 0;
+		}
+		tr:nth-child(2n) {
+			background-color: hsla(0, 0%, 90%, 1);
+		}
+		tr:nth-child(2n+1) {
+			background-color: hsla(0, 0%, 95%, 1);
+		}
+		td {
+			padding: 3px;
+		}
+	</style>
+</head>
+<body>
+	<div id="presets">
+	</div>
+	<table>
+		<tr>
+			<td>
+				Day
+			</td>
+			<td>
+				<select id="day">
+				</select>
+			</td>
+			<td>
+				Month
+			</td>
+			<td>
+				<select id="month">
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Hour
+			</td>
+			<td>
+				<select id="hour">
+				</select>
+			</td>
+			<td>
+				Minute
+			</td>
+			<td>
+				<select id="minute">
+				</select>
+			</td>
+		</tr>
+	</table>
+	<button id="send">Send</button>
+	<script src="popup.js"></script>
+</body>
