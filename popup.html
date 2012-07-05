@@ -9,21 +9,11 @@
 		td table {
 			width: 100%;
 		}
-		td table:first-child {
-			-webkit-border-top-left-radius: 4px;
-			-webkit-border-top-right-radius: 4px;
-		}
-		td table:last-child {
-			-webkit-border-bottom-left-radius: 4px;
-			-webkit-border-bottom-right-radius: 4px;
-		}
-		td table {
-			background-color: hsla(0, 0%, 95%, 1.0);
-		}
 		table, tbody, thead, tr, td {
 			margin: 0;
 			border: 0;
 			padding: 0;
+			text-align: center;
 		}
 		div#errorarea {
 			color: red;
@@ -36,9 +26,21 @@
 			border: 1px solid black;
 		}
 		input[type=text] {
+			display: inline-block;
+			color: hsla(120, 80%, 20%, 1.0);
 			text-align: center;
+			width: 45%;
 			background-color: hsla(120, 80%, 95%, 1.0);
 			border: 1px solid hsla(120, 80%, 30%, 1.0);
+			overflow: hidden;
+		}
+		input[type=text] + a {
+			width: 45%;
+			display: inline-block;
+			line-height: 2em;
+			color: hsla(0, 0%, 50%, 1.0);
+			text-decoration: none;
+			overflow: hidden;
 		}
 		#main {
 			background-color: hsla(0, 0%, 90%, 1.0);
@@ -55,7 +57,7 @@
 		</tr>
 		<tr>
 			<td>
-				<input type="text" id="addy" value="1minute" />
+				<input type="text" id="addy" value="1minute" /><a href="http://followupthen.com">@followupthen.com</a>
 			</td>
 		</tr>
 		<tr>
