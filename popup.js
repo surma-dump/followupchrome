@@ -11,13 +11,17 @@
 	// Presets
 	var addy = document.getElementById('addy');
 	var presets = {
-		'Now': '1minute',
-		'+1 Hour': '1hour',
-		'Tomorrow': 'tomorrow',
-		'Weekdays': {
+		'near': {
+			'Now': '1minute',
+			'1 Hour': '1hour',
+			'Tomorrow': 'tomorrow'
+		},
+		'week1': {
 			'Monday': 'monday',
 			'Tuesday': 'tuesday',
 			'Wednesday': 'wednesday',
+		},
+		'week2': {
 			'Thursday': 'thursday',
 			'Friday': 'friday',
 			'Saturday': 'saturday',
@@ -39,10 +43,13 @@
 		return button;
 	}
 	for(var preset in presets) {
+		var table = document.createElement('table');
 		var tr = document.createElement('tr');
-		var td = document.createElement('td')
+		table.appendChild(tr);
+		var td = document.createElement('td');
 		var subpresets = presets[preset];
 		if (typeof(presets[preset]) == "string") {
+			container = presetarea
 			subpresets = {};
 			subpresets[preset] = presets[preset];
 		}
@@ -51,7 +58,7 @@
 			tr.appendChild(td);
 			td = document.createElement('td');
 		}
-		presetarea.appendChild(tr);
+		presetarea.appendChild(table);
 	}
 
 	// Send button

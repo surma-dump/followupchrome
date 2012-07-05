@@ -6,17 +6,24 @@
 			font-size: 8pt;
 			box-sizing: border-box;
 		}
-		tr {
-			margin: 5px 0;
+		td table {
+			width: 100%;
 		}
-		tr:nth-child(2n) {
-			background-color: hsla(0, 0%, 90%, 1);
+		td table:first-child {
+			-webkit-border-top-left-radius: 4px;
+			-webkit-border-top-right-radius: 4px;
 		}
-		tr:nth-child(2n+1) {
-			background-color: hsla(0, 0%, 95%, 1);
+		td table:last-child {
+			-webkit-border-bottom-left-radius: 4px;
+			-webkit-border-bottom-right-radius: 4px;
 		}
-		td {
-			padding: 3px;
+		td table {
+			background-color: hsla(0, 0%, 95%, 1.0);
+		}
+		table, tbody, thead, tr, td {
+			margin: 0;
+			border: 0;
+			padding: 0;
 		}
 		div#errorarea {
 			color: red;
@@ -24,15 +31,26 @@
 		button, input {
 			width: 100%;
 		}
+		input {
+			-webkit-border-radius: 4px;
+			border: 1px solid black;
+		}
+		input[type=text] {
+			text-align: center;
+			background-color: hsla(120, 80%, 95%, 1.0);
+			border: 1px solid hsla(120, 80%, 30%, 1.0);
+		}
+		#main {
+			background-color: hsla(0, 0%, 90%, 1.0);
+			-webkit-border-radius: 4px;
+			padding: 4px;
+		}
 	</style>
 </head>
 <body>
-	</div>
-	<table>
+	<table id="main">
 		<tr>
-			<td>
-				<table id="presetarea">
-				</table>
+			<td id="presetarea">
 			</td>
 		</tr>
 		<tr>
