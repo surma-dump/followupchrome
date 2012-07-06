@@ -13,7 +13,14 @@
 		"default_popup": "popup.html",
 		"default_icon": "icons/icon19.png"
 	},
+	"content_scripts": [
+		{
+			"matches": ["*://mail.google.com/*"],
+			"js": ["gmail.js"]
+		}
+	],
 	"permissions": [
-		"tabs"
+		"tabs",
+		"*://mail.google.com/*"
 	]
 }
