@@ -73,9 +73,10 @@
 				return;
 			}
 			tab = tab[0];
-			var subject = tab.title+' ('+tab.url+')';
+			var subject = encodeURIComponent(tab.title);
+			var body = encodeURIComponent(tab.url);
 			chrome.tabs.create({
-				'url': 'mailto:'+addy.value+'@followupthen.com?subject='+subject,
+				'url': 'mailto:'+addy.value+'@followupthen.com?subject='+subject+'&body='+body,
 				'active': true
 			});
 		});
