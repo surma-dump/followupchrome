@@ -43,10 +43,7 @@
 		return button;
 	}
 	for(var preset in presets) {
-		var table = document.createElement('table');
-		var tr = document.createElement('tr');
-		table.appendChild(tr);
-		var td = document.createElement('td');
+		var container = document.createElement('div');
 		var subpresets = presets[preset];
 		if (typeof(presets[preset]) == "string") {
 			container = presetarea
@@ -54,11 +51,9 @@
 			subpresets[preset] = presets[preset];
 		}
 		for(var subpreset in subpresets) {
-			td.appendChild(generatePresetButton(subpreset, subpresets[subpreset]));
-			tr.appendChild(td);
-			td = document.createElement('td');
+			container.appendChild(generatePresetButton(subpreset, subpresets[subpreset]));
 		}
-		presetarea.appendChild(table);
+		presetarea.appendChild(container);
 	}
 
 	// Send button
@@ -73,9 +68,10 @@
 				return;
 			}
 			tab = tab[0];
-			var subject = tab.title+' ('+tab.url+')';
+			var subject = encodeURIComponent(tab.title);
+			var body = encodeURIComponent(tab.url);
 			chrome.tabs.create({
-				'url': 'mailto:'+addy.value+'@followupthen.com?subject='+subject,
+				'url': 'mailto:'+addy.value+'@followupthen.com?subject='+subject+'&body='+body,
 				'active': true
 			});
 		});
