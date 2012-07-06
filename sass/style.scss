@@ -1,0 +1,86 @@
+@import "compass/reset";
+@import "compass/css3/text-shadow";
+@import "compass/css3/images";
+@import "compass/css3/border-radius";
+
+$color-xlight: hsla(204, 100%, 90%, 1.0);
+$color-light: hsla(204, 100%, 70%, 1.0);
+$color-main: hsla(204, 100%, 50%, 1.0);
+$color-dark: hsla(204, 100%, 40%, 1.0);
+$color-xdark: hsla(204, 100%, 20%, 1.0);
+$spacing: 10pt;
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Helvetica", sans-serif !important;
+	font-size: 8pt;
+	width: 300px;
+	margin: 0 auto;
+	padding: $spacing;
+	border: 0;
+	box-sizing: content-box;
+}
+
+#errorarea {
+	color: red;
+}
+
+#presetarea {
+	margin-bottom: $spacing;
+	background-color: $color-xlight;
+	padding: $spacing;
+	@include border-radius(4px);
+	div {
+		text-align: center;
+	}
+	button {
+		color: black;
+		border: 1px solid black;
+		@include border-radius(4px);
+		@include background-image(linear-gradient(top, hsla(0, 0%, 90%, 1.0), hsla(0, 0%, 98%, 1.0)));
+		&:hover {
+			color: $color-main;
+			border-color: $color-dark;
+		}
+	}
+}
+
+// Addy display
+#display {
+	margin-bottom: $spacing;
+	text-align: center;
+	input {
+		display: inline-block;
+		color: $color-xdark;
+		text-align: center;
+		border: 1px solid $color-xdark;
+		margin: 0;
+		@include border-radius(4px);
+		background-color: $color-xlight;
+	}
+	a {
+		display: inline-block;
+		color: hsla(0, 0%, 50%, 1.0);
+		line-height: 2em;
+		text-decoration: none;
+		margin-left: 5pt;
+	}
+}
+
+button#send {
+	display: block;
+	width: 100%;
+	color: hsla(204, 0%, 100%, 1.0);
+	font-size: 12pt;
+	padding: 0.25em;
+	border: 1px solid $color-dark;
+
+	@include border-radius(4px);
+	@include single-text-shadow(1px, 1px, 2px, hsla(0, 0%, 0%, 0.5));
+	@include background-image(linear-gradient(top, $color-main, $color-light));
+	&:hover {
+		@include background-image(linear-gradient(top, $color-dark, $color-light));
+	}
+}
